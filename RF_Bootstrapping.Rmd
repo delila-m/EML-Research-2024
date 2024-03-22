@@ -1,0 +1,46 @@
+---
+title: "RandomForest Bootstrapping"
+author: "Delila Medlin"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+# necessary libraries 
+library(randomForest)
+library(ranger)
+library(caret)
+library(tidyverse)
+library(rsample)
+```
+
+Loading in the training and validation data, merging it into one dataset, also setting seed for random numbers used later on.
+```{r}
+grainsize <- read.csv("D:/Lakes/Eight Mile Lake/EML20-1_PSA_Delila.xlsx - EML20-1_PSA_Fine.csv", header = TRUE)[1:21,5] 
+grainsize <- tibble(Clay = c(grainsize))
+
+hsi_data <- read.csv("D:/Lakes/Eight Mile Lake/EML20_1B_1U_1_2023-01-24_21-41-36/filtered_reflectance_EML_20_1B_1U_1_w") 
+hsi_data <- hsi_data[ ,-1]
+hsi_data <- hsi_data[ ,-1]
+
+
+# bind the data into one set
+# and remove ID column 
+full_hsi_gs_data <- cbind(hsi_data, grainsize)
+
+set.seed(22)
+```
+
+Use bootstraps function, which constructs 100 replicas of 
+
+
+Helper function to create a RF model on each bootstrap sample
+```{r}
+boots <- bootstraps(full_hsi_gs_data, times = 100)
+
+```
+
+
+
