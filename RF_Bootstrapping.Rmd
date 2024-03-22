@@ -39,7 +39,6 @@ Use bootstraps function, which constructs 100 replicas of
 Helper function to create a RF model on each bootstrap sample
 ```{r}
 boots <- bootstraps(full_hsi_gs_data, times = 100)
-
 ```
 
 
